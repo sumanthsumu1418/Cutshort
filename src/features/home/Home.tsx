@@ -120,7 +120,7 @@ const Home = ({navigation}: Props) => {
   };
 
   const sendMoney = () => {
-    navigation.navigate('ProductView');
+    navigation.navigate('SendMoney');
   };
 
   const requestMoney = () => {
