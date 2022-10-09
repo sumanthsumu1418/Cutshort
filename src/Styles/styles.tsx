@@ -161,4 +161,51 @@ export default StyleSheet.create({
     fontSize: 20,
     fontWeight: '500',
   },
+  SendMoneyTextStyle: {
+    color: '#FFFFFF',
+  },
+  SendMoneyButtonContainer: {
+    height: height * 0.064,
+    width: width * 0.402,
+  },
+  SendMoneyTransformBG: {
+    position: 'absolute',
+    width: width,
+    height: height * 0.422,
+  },
+  SendMoneyHeaderContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  SendMoneyHeaderTitleText: {
+    fontSize: 16,
+    fontWeight: '500',
+    textAlign: 'center',
+  },
+  defaultCirContainerStyle: {
+    position: 'absolute',
+    width: 175,
+    height: 175,
+    top: height * 0.153,
+    backgroundColor: '#192259',
+    borderRadius: 82.5,
+  },
+  senDMoneyPofileImgStyle: {
+    width: 125,
+    height: 125,
+    position: 'absolute',
+    top: height * 0.18,
+  },
+  SendMoneyTextContainer: {
+    position: 'absolute',
+    top: height * 0.4,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  sendMoneyTextStule: {
+    color: '#EEEEEE',
+    fontSize: 24,
+    fontWeight: '500',
+    textAlignVertical: 'center',
+  },
 });

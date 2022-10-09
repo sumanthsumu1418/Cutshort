@@ -79,6 +79,7 @@ const ProductView = ({navigation}: Props) => {
         marginTop: 24,
       }}>
       {/* <View style={{flex: 0.9}}></View> */}
+      <View style={{flexDirection: 'row'}}>{/* <FastImage source={}/> */}</View>
       <ProductViewFooter />
     </View>
   );

@@ -10,12 +10,15 @@ import Home from '../home/Home';
 import Landing from '../landing/Landing';
 import SendMoney from '../sendMoney/SendMoney';
 import RequestMoney from '../requestMoney/RequestMoney';
-import ProductView from '../productView/ProductView'
-import {Colors} from '../../Theme/Variables';
+import ProductView from '../productView/ProductView';
+// import {Colors} from '../../Theme/Variables';
 
 export type RootStackParamsList = {
   Home: undefined;
   Landing: undefined;
+  SendMoney: undefined;
+  RequestMoney: undefined;
+  ProductView: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamsList>();
@@ -55,7 +58,7 @@ function Navigator() {
           name="RequestMoney"
           component={RequestMoney}
         />
-         <Stack.Screen
+        <Stack.Screen
           options={{headerShown: false}}
           name="ProductView"
           component={ProductView}
