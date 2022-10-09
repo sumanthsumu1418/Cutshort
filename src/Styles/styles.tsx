@@ -230,5 +230,9 @@ export default StyleSheet.create({
   },
   inputStyle: {
     // borderRadius: 8,
+    color: '#fff',
+    paddingHorizontal: 6,
+    fontWeight: '400',
+    fontSize: 14,
   },
 });

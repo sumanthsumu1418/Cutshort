@@ -26,7 +26,9 @@ const RequestMoney = ({navigation}: Props) => {
   const goBack = () => {
     navigation.navigate('Home');
   };
-
+  const onChangeText = text => {
+    setValue(text);
+  };
   const HeaderView = () => {
     return (
       <View style={styles.SendMoneyHeaderContainer}>
@@ -37,9 +39,7 @@ const RequestMoney = ({navigation}: Props) => {
         <View style={{flex: 8}}>
           <View style={{flex: 1}}>
             <Input
-              onChangeText={value => {
-                setValue(value);
-              }}
+              onChangeText={onChangeText}
               iconPosition={undefined}
               icon={undefined}
               style={styles.inputStyle}
