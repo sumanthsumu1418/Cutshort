@@ -208,4 +208,27 @@ export default StyleSheet.create({
     fontWeight: '500',
     textAlignVertical: 'center',
   },
+  wrapper: {
+    height: height * 0.0515,
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 5,
+    marginTop: 5,
+    backgroundColor: '#10194E',
+  },
+  inputContainer: {
+    paddingVertical: 12,
+  },
+  textInput: {
+    flex: 1,
+    width: '100%',
+  },
+  error: {
+    color: Colors.error,
+    paddingTop: 4,
+    fontSize: 12,
+  },
+  inputStyle: {
+    // borderRadius: 8,
+  },
 });

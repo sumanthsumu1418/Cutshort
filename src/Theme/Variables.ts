@@ -23,6 +23,7 @@ export const Colors = {
   homeAddBG: '#212A6B',
   homeMoneyOpnBorder: '#464E8A',
   homeAddText: '#426DDC',
+  inputFocus: '#1DC7AC'
 };
 
 export const NavigationColors = {
