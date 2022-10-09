@@ -1,0 +1,12 @@
+// {
+//   "baseURL": "http://13.234.232.253/api",
+//   "sendOTP": "/verification",
+//   "sendOTPSignature": "xyz",
+//   "createNewUser": "/user",
+//   "createNewUserToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2MjE4MjcxMywianRpIjoiYTM3NTg2ZGUtOTMxYS00MzRkLThhNjAtZTVkMDAyYzU3ZGU1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Iis5MTk0Nzk3ODk2MTgiLCJuYmYiOjE2NjIxODI3MTN9.CN-iEgEplJfqZzwdPChBPoXqfEZEQya5rpNssw1S0jE",
+//   "getUserDetailsToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2MjE4MjcxMywianRpIjoiYTM3NTg2ZGUtOTMxYS00MzRkLThhNjAtZTVkMDAyYzU3ZGU1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Iis5MTk0Nzk3ODk2MTgiLCJuYmYiOjE2NjIxODI3MTN9.CN-iEgEplJfqZzwdPChBPoXqfEZEQya5rpNssw1S0jE",
+//   "createNewTaks": "/task",
+//   "createNewTaskToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2MjE4MjcxMywianRpIjoiYTM3NTg2ZGUtOTMxYS00MzRkLThhNjAtZTVkMDAyYzU3ZGU1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Iis5MTk0Nzk3ODk2MTgiLCJuYmYiOjE2NjIxODI3MTN9.CN-iEgEplJfqZzwdPChBPoXqfEZEQya5rpNssw1S0jE",
+//   "getAllTaskToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2MjE4MjcxMywianRpIjoiYTM3NTg2ZGUtOTMxYS00MzRkLThhNjAtZTVkMDAyYzU3ZGU1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Iis5MTk0Nzk3ODk2MTgiLCJuYmYiOjE2NjIxODI3MTN9.CN-iEgEplJfqZzwdPChBPoXqfEZEQya5rpNssw1S0jE",
+//   "updateTaskToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2MjE4MjcxMywianRpIjoiYTM3NTg2ZGUtOTMxYS00MzRkLThhNjAtZTVkMDAyYzU3ZGU1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Iis5MTk0Nzk3ODk2MTgiLCJuYmYiOjE2NjIxODI3MTN9.CN-iEgEplJfqZzwdPChBPoXqfEZEQya5rpNssw1S0jE"
+// }
