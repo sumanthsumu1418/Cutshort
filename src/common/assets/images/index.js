@@ -16,4 +16,5 @@ export const images = {
   closeIcon: require('./close.svg'),
   shareIcon: require('./share.svg'),
   shoe: require('./Transparent_shoe.png'),
+  senderProfImg: require('./senderProfImage.png'),
 };

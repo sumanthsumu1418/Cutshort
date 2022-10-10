@@ -12,6 +12,8 @@ import {Colors} from '../../Theme/Variables';
 import GoBack from '../../components/GoBack';
 import CircularContainer from '../../common/components/CircularContainer';
 import Input from '../../common/components/Input';
+import RectangleContainer from '../../common/components/RectangleContainer';
+import FastImage from 'react-native-fast-image';
 
 const width = layoutUtil.width;
 const height = layoutUtil.height;
@@ -98,15 +100,60 @@ const RequestMoney = ({navigation}: Props) => {
 
   return (
     <View style={styles.homeContainer}>
+      <View style={{flex: 0.625}}>
+        <View
+          style={{
+            marginTop: height * 0.05,
+            marginBottom: height * 0.025,
+            marginHorizontal: width * 0.04,
+          }}>
+          <HeaderView />
+        </View>
+        <View style={{alignItems: 'center'}}>
+          <CircularContainerView />
+        </View>
+      </View>
+      {/* <Space.V s={12} /> */}
       <View
         style={{
-          marginVertical: height * 0.05,
-          marginHorizontal: width * 0.04,
+          ...styles.tranactionViewContainer,
+          flex: 0.375,
+          alignItems: 'center',
         }}>
-        <HeaderView />
-      </View>
-      <View style={{alignItems: 'center'}}>
-        <CircularContainerView />
+        <Space.V s={8} />
+        <View style={{alignSelf: 'center'}}>
+          <RectangleContainer
+            rectContainerStyle={{
+              ...styles.rectangleContainerStyle,
+              height: 7,
+              borderRadius: 4,
+            }}
+          />
+        </View>
+        <Space.V s={16} />
+        <Image source={images.senderProfImg} />
+        <Space.V s={8} />
+        <Text style={{...styles.sendMoneyTextStule, fontSize: 20}}>
+          Adeleke Adeyanju
+        </Text>
+        <Space.V s={12} />
+        <Text
+          style={{
+            ...styles.sendMoneyTextStule,
+            fontSize: 14,
+            fontWeight: '400',
+          }}>
+          (+234) 905 1694 275
+        </Text>
+        <Space.V s={18} />
+        <AppButton
+          onPress={undefined}
+          title={'Continue'}
+          backgroundColor={'#FF2E63'}
+          buttonContainer={{width: width * 0.392, height: height * 0.07}}
+          textStyle={styles.SendMoneyTextStyle}
+          borderStyle={undefined}
+        />
       </View>
     </View>
   );
