@@ -17,4 +17,10 @@ export const images = {
   shareIcon: require('./share.svg'),
   shoe: require('./Transparent_shoe.png'),
   senderProfImg: require('./senderProfImage.png'),
+  reqProf1: require('./RequestProfie1.png'),
+  reqProf2: require('./RequestProfile2.png'),
+  reqProf3: require('./requestProfile3.png'),
+  reqProf4: require('./requestProfile4.png'),
+  reqProf5: require('./requestProfile5.png'),
+  reqProfMain: require('./requestProfileMain.png'),
 };

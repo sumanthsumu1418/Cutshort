@@ -51,7 +51,6 @@ const RequestMoney = ({navigation}: Props) => {
             />
           </View>
         </View>
-        {/* <View style={{flex: 1}}></View> */}
       </View>
     );
   };
@@ -155,6 +154,66 @@ const RequestMoney = ({navigation}: Props) => {
           borderStyle={undefined}
         />
       </View>
+      <Image
+        style={{
+          position: 'absolute',
+          width: 36,
+          height: 36,
+          left: width * 0.802,
+          top: height * 0.429,
+        }}
+        source={images.reqProf5}
+      />
+      <Image
+        style={{
+          position: 'absolute',
+          width: 36,
+          height: 36,
+          left: width * 0.4506,
+          top: height * 0.165,
+        }}
+        source={images.reqProf1}
+      />
+      <Image
+        style={{
+          position: 'absolute',
+          width: 36,
+          height: 36,
+          left: width * 0.152,
+          top: height * 0.235,
+        }}
+        source={images.reqProf2}
+      />
+      <Image
+        style={{
+          position: 'absolute',
+          width: 36,
+          height: 36,
+          left: width * 0.25,
+          top: height * 0.39,
+        }}
+        source={images.reqProf3}
+      />
+      <Image
+        style={{
+          position: 'absolute',
+          width: 36,
+          height: 36,
+          left: width * 0.45,
+          top: height * 0.51,
+        }}
+        source={images.reqProf4}
+      />
+      <Image
+        style={{
+          position: 'absolute',
+          width: 72,
+          height: 72,
+          left: width * 0.632,
+          top: height * 0.279,
+        }}
+        source={images.reqProfMain}
+      />
     </View>
   );
 };
