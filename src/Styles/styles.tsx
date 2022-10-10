@@ -8,7 +8,7 @@ const width = layoutUtil.width;
 export default StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    // alignItems: 'center',
     backgroundColor: Colors.landingDarkBlue,
   },
   buttonContainer: {

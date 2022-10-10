@@ -13,6 +13,7 @@ import RectangleContainer from '../../common/components/RectangleContainer';
 import FastImage from 'react-native-fast-image';
 import OptimizedFlatlist from '../../common/components/OptimizedFlatlist';
 import styles from '../../Styles/styles';
+import ProductView from '../productView/ProductView';
 
 interface Props {
   navigation: StackNavigationProp<RootStackParamsList, 'Home'>;
@@ -125,6 +126,10 @@ const Home = ({navigation}: Props) => {
 
   const requestMoney = () => {
     navigation.navigate('RequestMoney');
+  };
+
+  const productView = () => {
+    navigation.navigate('ProductView');
   };
 
   const ProfileIconView = () => {
