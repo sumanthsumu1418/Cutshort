@@ -53,6 +53,48 @@ const RequestMoney = ({navigation}: Props) => {
       </View>
     );
   };
+  const CircularContainerView = () => {
+    return (
+      <>
+        <CircularContainer
+          circularContainerStyle={{
+            ...styles.defaultCirContainerStyle,
+            width: width,
+            height: width,
+            borderRadius: width * 0.5,
+            top: -0.05,
+            backgroundColor: Colors.homeBG,
+            borderColor: '#0D164B',
+            borderWidth: 1,
+          }}
+        />
+        <CircularContainer
+          circularContainerStyle={{
+            ...styles.defaultCirContainerStyle,
+            width: width * 0.76,
+            height: width * 0.76,
+            borderRadius: width * 0.353,
+            top: height * 0.051,
+            backgroundColor: Colors.homeBG,
+            borderColor: '#0D164B',
+            borderWidth: 1,
+          }}
+        />
+        <CircularContainer
+          circularContainerStyle={{
+            ...styles.defaultCirContainerStyle,
+            width: width * 0.493,
+            height: width * 0.493,
+            borderRadius: width * 0.24515,
+            top: height * 0.112,
+            backgroundColor: Colors.homeBG,
+            borderColor: '#0D164B',
+            borderWidth: 1,
+          }}
+        />
+      </>
+    );
+  };
 
   return (
     <View style={styles.homeContainer}>
@@ -62,6 +104,9 @@ const RequestMoney = ({navigation}: Props) => {
           marginHorizontal: width * 0.04,
         }}>
         <HeaderView />
+      </View>
+      <View style={{alignItems: 'center'}}>
+        <CircularContainerView />
       </View>
     </View>
   );
