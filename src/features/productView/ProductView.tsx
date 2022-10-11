@@ -217,49 +217,16 @@ const ProductView = ({navigation}: Props) => {
             setColorIndex(index);
             console.log(index);
           }}
-          style={{
-            flex: 1,
-            marginVertical: 8,
-            marginHorizontal: 2,
-          }}>
+          style={styles.colorContainer}>
           {index == colorIndex ? (
-            <View
-              style={{
-                width: 50,
-                height: 50,
-                backgroundColor: '#fff',
-                borderRadius: 25,
-                borderWidth: 1,
-                borderColor: '#C8B8A0',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <View
-                style={{
-                  width: 40,
-                  height: 40,
-                  backgroundColor: '#000',
-                  borderRadius: 20,
-                }}></View>
+            <View style={styles.selectedColorContainer}>
+              <View style={styles.ColorContainerView}></View>
             </View>
           ) : (
-            <View
-              style={{
-                height: 50,
-                width: 50,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <View
-                style={{
-                  width: 40,
-                  height: 40,
-                  backgroundColor: '#000',
-                  borderRadius: 20,
-                }}></View>
+            <View style={styles.unselectedColorContainer}>
+              <View style={styles.ColorContainerView}></View>
             </View>
           )}
-
           <Space.V s={4} />
           <Text
             style={{
@@ -276,27 +243,8 @@ const ProductView = ({navigation}: Props) => {
 
   const decorationRenderItem = useCallback(({item, index}) => {
     return (
-      <View
-        style={{
-          backgroundColor: '#fff',
-          width: width - 24,
-          height: height * 0.475,
-          borderWidth: 1,
-          borderColor: '#0000001A',
-          marginRight: 12,
-          // justifyContent: 'center',
-          borderRadius: 5,
-        }}>
-        <View
-          style={{
-            backgroundColor: '#5A0200',
-            // width: width - 40,
-            borderTopLeftRadius: 5,
-            borderTopRightRadius: 5,
-            height: height * 0.075,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
+      <View style={styles.decrnContView}>
+        <View style={styles.decrnHeaderContView}>
           <Text style={{color: '#fff', fontSize: 18}}>CALF LEATHER</Text>
         </View>
         <View style={{margin: 12}}>
@@ -310,6 +258,45 @@ const ProductView = ({navigation}: Props) => {
       </View>
     );
   }, []);
+
+  const ColorOrMaterialView = () => {
+    return (
+      <View>
+        <View style={styles.colorOrMatContainer}>
+          <FlatList
+            data={colors}
+            renderItem={renderItem}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          />
+        </View>
+        <View style={{top: height * 0.295, margin: 12, position: 'absolute'}}>
+          <FlatList
+            data={colors}
+            renderItem={decorationRenderItem}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          />
+        </View>
+        <View style={styles.progressViewContainer}>
+          <View style={styles.progressSelected}></View>
+          <Space.H s={4} />
+          <View
+            style={{
+              ...styles.progressSelected,
+              backgroundColor: '#9B9B9B',
+            }}></View>
+          <Space.H s={4} />
+          <View
+            style={{
+              ...styles.progressSelected,
+              backgroundColor: '#9B9B9B',
+            }}></View>
+        </View>
+      </View>
+    );
+  };
+
   return (
     <View
       style={{
@@ -321,70 +308,7 @@ const ProductView = ({navigation}: Props) => {
       <ProductViewHeader />
       <ProductImageView />
       <DecorationView />
-      {title !== 'MODEL STYLE & DECORATION' && (
-        <View>
-          <View
-            style={{
-              position: 'absolute',
-              backgroundColor: '#fff',
-              width: width,
-              height: height * 0.047,
-              borderWidth: 1,
-              borderColor: '#0000001A',
-              top: height * 0.245,
-              justifyContent: 'center',
-            }}>
-            <FlatList
-              data={colors}
-              renderItem={renderItem}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-            />
-          </View>
-          <View style={{top: height * 0.295, margin: 12, position: 'absolute'}}>
-            <FlatList
-              data={colors}
-              renderItem={decorationRenderItem}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-            />
-          </View>
-          <View
-            style={{
-              position: 'absolute',
-              top: height * 0.79,
-              width: width,
-              justifyContent: 'center',
-              alignItems: 'center',
-              flexDirection: 'row',
-            }}>
-            <View
-              style={{
-                width: 10,
-                height: 10,
-                backgroundColor: '#000',
-                borderRadius: 5,
-              }}></View>
-            <Space.H s={4} />
-            <View
-              style={{
-                width: 10,
-                height: 10,
-                backgroundColor: '#9B9B9B',
-                borderRadius: 5,
-              }}></View>
-            <Space.H s={4} />
-            <View
-              style={{
-                width: 10,
-                height: 10,
-                backgroundColor: '#9B9B9B',
-                borderRadius: 5,
-              }}></View>
-          </View>
-        </View>
-      )}
-
+      {title !== 'MODEL STYLE & DECORATION' && <ColorOrMaterialView />}
       <ProductViewFooter />
     </View>
   );
