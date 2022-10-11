@@ -333,7 +333,7 @@ export default StyleSheet.create({
   },
   progressViewContainer: {
     position: 'absolute',
-    top: height * 0.79,
+    top: height * 0.795,
     width: width,
     justifyContent: 'center',
     alignItems: 'center',
