@@ -87,49 +87,19 @@ const ProductViewFooter = () => {
 
 const ProductViewHeader = () => {
   return (
-    <View
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginHorizontal: 12,
-      }}>
+    <View style={styles.productHeaderContainer}>
       <View>
-        <Image
-          style={{
-            width: 80,
-            height: 40,
-            resizeMode: 'contain',
-            marginTop: 3,
-            marginLeft: 24,
-          }}
-          source={images.logo}
-        />
+        <Image style={styles.productLogo} source={images.logo} />
       </View>
       <View style={{flexDirection: 'row'}}>
-        <View
-          style={{
-            width: 50,
-            height: 50,
-            backgroundColor: '#FFFFFF',
-            borderRadius: 25,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
+        <View style={styles.imageContainer}>
           <Image
             style={{width: 20, height: 24, resizeMode: 'contain'}}
             source={images.shareIcon}
           />
         </View>
         <Space.H s={6} />
-        <View
-          style={{
-            width: 50,
-            height: 50,
-            backgroundColor: '#FFFFFF',
-            borderRadius: 25,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
+        <View style={styles.imageContainer}>
           <Image
             style={{width: 15, height: 15, resizeMode: 'contain'}}
             source={images.closeIcon}
@@ -143,7 +113,7 @@ const ProductViewHeader = () => {
 const ProductView = ({navigation}: Props) => {
   const [title, setTitle] = useState('MODEL STYLE & DECORATION');
   const [itemIndex, setItemIndex] = useState(0);
-  const [colorIndex, setColorIndex] = useState(0);
+  const [colorIndex, setColorIndex] = useState(1);
   const ProductImageView = () => {
     return (
       <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -162,21 +132,32 @@ const ProductView = ({navigation}: Props) => {
     );
   };
 
+  const ProductDecrnHeaderView = () => {
+    return (
+      <View style={styles.productDecrnHeaderContainer}>
+        <View style={{flex: 1}}>
+          <Text style={{fontSize: 18, textAlign: 'left'}}>{`<--`}</Text>
+        </View>
+        <View style={{flex: 8}}>
+          <Text style={{fontSize: 18, textAlign: 'center'}}>{`${title}`}</Text>
+        </View>
+        <View style={{flex: 1}}>
+          <Text style={{fontSize: 18, textAlign: 'right'}}>{`-->`}</Text>
+        </View>
+      </View>
+    );
+  };
   const DecorationView = () => {
     return (
       <View
         style={{
-          position: 'absolute',
           top:
             title == 'MODEL STYLE & DECORATION'
               ? height * 0.82
               : height * 0.266,
-          backgroundColor: '#fff',
-          width: width,
           height:
             title == 'MODEL STYLE & DECORATION' ? height * 0.08 : height * 0.06,
-          borderWidth: 1,
-          borderColor: '#0000001A',
+          ...styles.productDecorationContainer,
         }}>
         <TouchableOpacity
           onPress={() => {
@@ -185,41 +166,20 @@ const ProductView = ({navigation}: Props) => {
             } else {
               setTitle('MODEL STYLE & DECORATION');
             }
-
             console.log('title ==>', title);
           }}
           style={{marginTop: 8}}>
           {title == 'MODEL STYLE & DECORATION' ? (
             <View style={{alignItems: 'center'}}>
               <RectangleContainer
-                rectContainerStyle={{
-                  width: 36,
-                  height: 2,
-                  backgroundColor: '#D3CFCD',
-                }}
+                rectContainerStyle={styles.productRectContainer}
               />
             </View>
           ) : (
             <View></View>
           )}
           <Space.V s={title == 'MODEL STYLE & DECORATION' ? 8 : 4} />
-          <View
-            style={{
-              flexDirection: 'row',
-              marginHorizontal: 24,
-              justifyContent: 'space-between',
-            }}>
-            <View style={{flex: 1}}>
-              <Text style={{fontSize: 18, textAlign: 'left'}}>{`<--`}</Text>
-            </View>
-            <View style={{flex: 8}}>
-              <Text
-                style={{fontSize: 18, textAlign: 'center'}}>{`${title}`}</Text>
-            </View>
-            <View style={{flex: 1}}>
-              <Text style={{fontSize: 18, textAlign: 'right'}}>{`-->`}</Text>
-            </View>
-          </View>
+          <ProductDecrnHeaderView />
         </TouchableOpacity>
       </View>
     );
@@ -254,12 +214,13 @@ const ProductView = ({navigation}: Props) => {
       <View style={{margin: 12, justifyContent: 'center'}}>
         <TouchableOpacity
           onPress={async () => {
+            setColorIndex(index);
             console.log(index);
           }}
           style={{
             flex: 1,
-            marginVertical: 10,
-            marginHorizontal: 6,
+            marginVertical: 8,
+            marginHorizontal: 2,
           }}>
           {index == colorIndex ? (
             <View
@@ -284,14 +245,22 @@ const ProductView = ({navigation}: Props) => {
           ) : (
             <View
               style={{
-                width: 40,
-                height: 40,
-                backgroundColor: '#000',
-                borderRadius: 20,
-              }}></View>
+                height: 50,
+                width: 50,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <View
+                style={{
+                  width: 40,
+                  height: 40,
+                  backgroundColor: '#000',
+                  borderRadius: 20,
+                }}></View>
+            </View>
           )}
 
-          <Space.V s={index == colorIndex ? 1 : 4} />
+          <Space.V s={4} />
           <Text
             style={{
               textAlign: 'center',
