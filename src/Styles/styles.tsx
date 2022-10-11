@@ -152,6 +152,11 @@ export default StyleSheet.create({
   footerContainer: {
     width: width,
     height: height * 0.08,
+    backgroundColor: '#000',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
+    // width: width,
   },
   footerBorderStyle: {
     borderRadius: 0,

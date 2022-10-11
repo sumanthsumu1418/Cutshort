@@ -10,6 +10,7 @@ const OptimizedFlatlist = ({
   updateCellsBatchingPeriod,
   initialNumToRender,
   windowSize,
+  ...props
 }) => {
   const ITEM_HEIGHT = itemHeight; // fixed height of item component
   const getItemLayout = useCallback(
@@ -33,6 +34,7 @@ const OptimizedFlatlist = ({
         updateCellsBatchingPeriod={updateCellsBatchingPeriod || 30}
         initialNumToRender={initialNumToRender || 8}
         windowSize={windowSize || 13}
+        {...props}
       />
     </View>
   );

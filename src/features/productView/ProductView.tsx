@@ -1,6 +1,13 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import React, {useCallback, useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet, Text, View, Image} from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  FlatList,
+} from 'react-native';
 
 import Space from '../../common/components/abstract/Space';
 import {RootStackParamsList} from '../navigation/Navigator';
@@ -22,18 +29,25 @@ interface Props {
   navigation: StackNavigationProp<RootStackParamsList, 'Home'>;
 }
 
+const colors = [
+  'red',
+  'blue',
+  'green',
+  'red',
+  'blue',
+  'green',
+  'red',
+  'blue',
+  'green',
+  'red',
+  'blue',
+  'green',
+];
+
 const ProductViewFooter = () => {
   return (
     <View style={{position: 'absolute', top: height * 0.9}}>
-      <TouchableOpacity
-        style={{
-          ...styles.footerContainer,
-          backgroundColor: '#000',
-          justifyContent: 'space-between',
-          flexDirection: 'row',
-          alignItems: 'center',
-          width: width,
-        }}>
+      <TouchableOpacity style={styles.footerContainer}>
         <View style={{flexDirection: 'row', marginLeft: width * 0.1}}>
           <View>
             <Text
@@ -128,6 +142,8 @@ const ProductViewHeader = () => {
 
 const ProductView = ({navigation}: Props) => {
   const [title, setTitle] = useState('MODEL STYLE & DECORATION');
+  const [itemIndex, setItemIndex] = useState(0);
+  const [colorIndex, setColorIndex] = useState(0);
   const ProductImageView = () => {
     return (
       <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -146,16 +162,8 @@ const ProductView = ({navigation}: Props) => {
     );
   };
 
-  return (
-    <View
-      style={{
-        ...styles.container,
-        backgroundColor: '#F3F1F0',
-        marginTop: 24,
-      }}>
-      <Space.V s={12} />
-      <ProductViewHeader />
-      <ProductImageView />
+  const DecorationView = () => {
+    return (
       <View
         style={{
           position: 'absolute',
@@ -214,6 +222,200 @@ const ProductView = ({navigation}: Props) => {
           </View>
         </TouchableOpacity>
       </View>
+    );
+  };
+
+  const renderItem = useCallback(({item, index}) => {
+    // console.log(item);
+    return (
+      <View style={{justifyContent: 'center', marginHorizontal: 12}}>
+        <TouchableOpacity
+          onPress={async () => {
+            await setItemIndex(index);
+            console.log(itemIndex, index);
+          }}
+          style={{marginHorizontal: 12}}>
+          <Text
+            style={{
+              fontSize: 17,
+              color: index == itemIndex ? '#000' : '#646464',
+              fontWeight: index == itemIndex ? '500' : '300',
+            }}>
+            {item}
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }, []);
+
+  const colorRenderItem = useCallback(({item, index}) => {
+    console.log(item, index);
+    return (
+      <View style={{margin: 12, justifyContent: 'center'}}>
+        <TouchableOpacity
+          onPress={async () => {
+            console.log(index);
+          }}
+          style={{
+            flex: 1,
+            marginVertical: 10,
+            marginHorizontal: 6,
+          }}>
+          {index == colorIndex ? (
+            <View
+              style={{
+                width: 50,
+                height: 50,
+                backgroundColor: '#fff',
+                borderRadius: 25,
+                borderWidth: 1,
+                borderColor: '#C8B8A0',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <View
+                style={{
+                  width: 40,
+                  height: 40,
+                  backgroundColor: '#000',
+                  borderRadius: 20,
+                }}></View>
+            </View>
+          ) : (
+            <View
+              style={{
+                width: 40,
+                height: 40,
+                backgroundColor: '#000',
+                borderRadius: 20,
+              }}></View>
+          )}
+
+          <Space.V s={index == colorIndex ? 1 : 4} />
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: 14,
+              color: index == colorIndex ? '#000' : '#646464',
+            }}>
+            {item}
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }, []);
+
+  const decorationRenderItem = useCallback(({item, index}) => {
+    return (
+      <View
+        style={{
+          backgroundColor: '#fff',
+          width: width - 24,
+          height: height * 0.475,
+          borderWidth: 1,
+          borderColor: '#0000001A',
+          marginRight: 12,
+          // justifyContent: 'center',
+          borderRadius: 5,
+        }}>
+        <View
+          style={{
+            backgroundColor: '#5A0200',
+            // width: width - 40,
+            borderTopLeftRadius: 5,
+            borderTopRightRadius: 5,
+            height: height * 0.075,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Text style={{color: '#fff', fontSize: 18}}>CALF LEATHER</Text>
+        </View>
+        <View style={{margin: 12}}>
+          <FlatList
+            data={colors}
+            renderItem={colorRenderItem}
+            numColumns={5}
+            showsHorizontalScrollIndicator={false}
+          />
+        </View>
+      </View>
+    );
+  }, []);
+  return (
+    <View
+      style={{
+        ...styles.container,
+        backgroundColor: '#F3F1F0',
+        marginTop: 24,
+      }}>
+      <Space.V s={12} />
+      <ProductViewHeader />
+      <ProductImageView />
+      <DecorationView />
+      {title !== 'MODEL STYLE & DECORATION' && (
+        <View>
+          <View
+            style={{
+              position: 'absolute',
+              backgroundColor: '#fff',
+              width: width,
+              height: height * 0.047,
+              borderWidth: 1,
+              borderColor: '#0000001A',
+              top: height * 0.245,
+              justifyContent: 'center',
+            }}>
+            <FlatList
+              data={colors}
+              renderItem={renderItem}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            />
+          </View>
+          <View style={{top: height * 0.295, margin: 12, position: 'absolute'}}>
+            <FlatList
+              data={colors}
+              renderItem={decorationRenderItem}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            />
+          </View>
+          <View
+            style={{
+              position: 'absolute',
+              top: height * 0.79,
+              width: width,
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'row',
+            }}>
+            <View
+              style={{
+                width: 10,
+                height: 10,
+                backgroundColor: '#000',
+                borderRadius: 5,
+              }}></View>
+            <Space.H s={4} />
+            <View
+              style={{
+                width: 10,
+                height: 10,
+                backgroundColor: '#9B9B9B',
+                borderRadius: 5,
+              }}></View>
+            <Space.H s={4} />
+            <View
+              style={{
+                width: 10,
+                height: 10,
+                backgroundColor: '#9B9B9B',
+                borderRadius: 5,
+              }}></View>
+          </View>
+        </View>
+      )}
+
       <ProductViewFooter />
     </View>
   );
