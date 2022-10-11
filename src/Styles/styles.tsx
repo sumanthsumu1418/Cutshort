@@ -340,8 +340,8 @@ export default StyleSheet.create({
     flexDirection: 'row',
   },
   progressSelected: {
-    width: 10,
-    height: 10,
+    width: 7,
+    height: 7,
     backgroundColor: '#000',
     borderRadius: 5,
   },
