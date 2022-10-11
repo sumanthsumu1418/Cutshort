@@ -280,7 +280,7 @@ export default StyleSheet.create({
   colorContainer: {
     flex: 1,
     marginVertical: 8,
-    marginHorizontal: 2,
+    marginHorizontal: 1,
   },
   selectedColorContainer: {
     width: 50,
