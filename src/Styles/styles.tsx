@@ -350,4 +350,50 @@ export default StyleSheet.create({
     marginTop: height * 0.06,
     marginHorizontal: width * 0.05,
   },
+  remixContainer: {
+    flex: 1,
+    backgroundColor: Colors.homeAddBG,
+  },
+  sliderContainer: {
+    position: 'absolute',
+    bottom: height * 0.1025,
+    right: width * 0.85,
+    transform: [{rotate: '-90deg'}],
+  },
+  sliderStyle: {
+    width: height * 0.7,
+    height: 60,
+    position: 'absolute',
+    left: 0,
+  },
+  playMusicContainer: {
+    position: 'absolute',
+    bottom: height * 0.1,
+
+    width: 60,
+    height: 60,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 30,
+  },
+  remixHeaderViewContainer: {
+    width: 30,
+    height: 30,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+  },
+  remixInstructionTextStle: {
+    textAlign: 'right',
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: '500',
+  },
+  cacheMusicContainer: {
+    position: 'absolute',
+          bottom: height * 0.1,
+          right: width * 0.15,
+  },
 });

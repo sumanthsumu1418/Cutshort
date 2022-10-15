@@ -16,7 +16,8 @@ const height = layoutUtil.height;
 const width = layoutUtil.width;
 
 const url = 'https://archive.org/download/Imagine_393/JohnLennon-Imagine.mp3';
-const url2 = 'https://www.bensound.com/bensound-music/bensound-love.mp3';
+const url2 =
+  'https://cdn.trendybeatz.com/audio/Bob-Marley-No-Women-No-Cry-[TrendyBeatz.com].mp3';
 
 var Sound = require('react-native-sound');
 
@@ -55,11 +56,7 @@ const Remixer = () => {
   const [value, setValue] = useState(0);
   const [play, setPlay] = useState(false);
   const [start, setStart] = useState(false);
-  const [counter, setCounter] = useState(0);
-  const [timer, setTimer] = useState(null);
   const [start1, setStart1] = useState(false);
-  const [counter1, setCounter1] = useState(0);
-  const [timer1, setTimer1] = useState(null);
   const [progress, setProgress] = useState(0);
   useEffect(() => {
     const volumeListener = SystemSetting.addVolumeListener(data => {
@@ -78,7 +75,7 @@ const Remixer = () => {
     });
   };
 
-  const downloadMusic = () => {
+  const downloadMusic = url => {
     setProgress(() => 1);
     RNFetchBlob.config({
       // add this option that makes response data to be stored as a file,
@@ -102,44 +99,72 @@ const Remixer = () => {
       });
   };
 
+  const CacheMusic = () => {
+    return (
+      <View style={styles.cacheMusicContainer}>
+        <TouchableOpacity onPress={() => downloadMusic(url)}>
+          <CircularProgress
+            percent={progress}
+            ringBgColor={Colors.homeAddBG}
+            iconPath={images.cloud}
+            // bgRingWidth={0}
+            radius={30}
+            imageStyle={{
+              width: 40,
+              height: 40,
+            }}
+          />
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   const RemixHeaderView = () => {
     return (
       <View style={styles.SendMoneyHeaderContainer}>
         <View style={styles.remixHeaderContainer}>
-          <View
-            style={{
-              width: 30,
-              height: 30,
-              backgroundColor: '#fff',
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 8,
-            }}>
+          <View style={styles.remixHeaderViewContainer}>
             <Image style={{resizeMode: 'contain'}} source={images.closeIcon} />
           </View>
         </View>
         <View
           style={{...styles.remixHeaderContainer, justifyContent: 'center'}}>
-          <Text
-            style={{
-              textAlign: 'right',
-              color: '#fff',
-              fontSize: 18,
-              fontWeight: '500',
-            }}>
-            Instructions
-          </Text>
+          <Text style={styles.remixInstructionTextStle}>Instructions</Text>
         </View>
       </View>
     );
   };
 
+  const PlayMusic = ({play, musicObj, right, music}) => {
+    return (
+      <View style={{...styles.playMusicContainer, right: right}}>
+        <TouchableOpacity
+          onPress={() => {
+            if (!play) {
+              console.log('play==>');
+              musicObj.play();
+              music == 'start'
+                ? setStart(play => !play)
+                : setStart1(play => !play);
+            } else {
+              console.log('Pause==>');
+              musicObj.pause();
+              music == 'start'
+                ? setStart(play => !play)
+                : setStart1(play => !play);
+            }
+          }}>
+          <Image
+            style={{width: 40, height: 40}}
+            source={play ? images.pause : images.play}
+          />
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: Colors.homeAddBG,
-      }}>
+    <View style={styles.remixContainer}>
       <RemixHeaderView />
       <View
         style={{
@@ -151,20 +176,9 @@ const Remixer = () => {
           Passing Stroam
         </Text>
       </View>
-      <View
-        style={{
-          position: 'absolute',
-          bottom: height * 0.1025,
-          right: width * 0.85,
-          transform: [{rotate: '-90deg'}],
-        }}>
+      <View style={styles.sliderContainer}>
         <Slider
-          style={{
-            width: height * 0.7,
-            height: 60,
-            position: 'absolute',
-            left: 0,
-          }}
+          style={styles.sliderStyle}
           minimumValue={0}
           maximumValue={1}
           maximumTrackTintColor="transparent"
@@ -189,87 +203,20 @@ const Remixer = () => {
           }}
           vertical={true}></Slider>
       </View>
-      <View
-        style={{
-          position: 'absolute',
-          bottom: height * 0.1,
-          right: width * 0.35,
-          width: 60,
-          height: 60,
-          backgroundColor: '#fff',
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: 30,
-        }}>
-        <TouchableOpacity
-          onPress={() => {
-            if (!start) {
-              console.log('play==>');
-              whoosh.play();
-              setStart(start => !start);
-            } else {
-              console.log('Pause==>');
-              whoosh.pause();
-              setStart(start => !start);
-            }
-          }}>
-          <Image
-            style={{width: 40, height: 40}}
-            source={start ? images.pause : images.play}
-          />
-        </TouchableOpacity>
-      </View>
-      <View
-        style={{
-          position: 'absolute',
-          bottom: height * 0.1,
-          right: width * 0.55,
-          width: 60,
-          height: 60,
-          backgroundColor: '#fff',
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: 30,
-        }}>
-        <TouchableOpacity
-          onPress={() => {
-            if (!start1) {
-              console.log('play==>');
-              whoosh1.play();
-              setStart1(start1 => !start1);
-            } else {
-              console.log('Pause==>');
-              whoosh1.pause();
-              setStart1(start1 => !start1);
-            }
-          }}>
-          <Image
-            style={{width: 40, height: 40}}
-            source={start1 ? images.pause : images.play}
-          />
-        </TouchableOpacity>
-      </View>
-      <View
-        style={{
-          position: 'absolute',
-          bottom: height * 0.1,
-          right: width * 0.15,
-        }}>
-        <TouchableOpacity onPress={downloadMusic}>
-          <CircularProgress
-            percent={progress}
-            ringBgColor={Colors.homeAddBG}
-            iconPath={images.cloud}
-            // bgRingWidth={0}
-            radius={30}
-            imageStyle={{
-              width: 40,
-              height: 40,
-            }}
-            // bgColor={'#fff'}
-          />
-        </TouchableOpacity>
-      </View>
+
+      <PlayMusic
+        play={start}
+        musicObj={whoosh}
+        right={width * 0.35}
+        music={'start'}
+      />
+      <PlayMusic
+        play={start1}
+        musicObj={whoosh1}
+        right={width * 0.55}
+        music={'start1'}
+      />
+      <CacheMusic />
     </View>
   );
 };
