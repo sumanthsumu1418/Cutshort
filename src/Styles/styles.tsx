@@ -345,4 +345,9 @@ export default StyleSheet.create({
     backgroundColor: '#000',
     borderRadius: 5,
   },
+  remixHeaderContainer: {
+    flex: 1,
+    marginTop: height * 0.06,
+    marginHorizontal: width * 0.05,
+  },
 });

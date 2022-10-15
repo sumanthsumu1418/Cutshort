@@ -23,4 +23,8 @@ export const images = {
   reqProf4: require('./requestProfile4.png'),
   reqProf5: require('./requestProfile5.png'),
   reqProfMain: require('./requestProfileMain.png'),
+  play: require('./play.png'),
+  pause: require('./pause-button.png'),
+  volume: require('./volume.png'),
+  cloud: require('./cloud.png'),
 };
