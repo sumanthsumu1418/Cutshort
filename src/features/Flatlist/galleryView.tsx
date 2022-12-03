@@ -13,8 +13,15 @@ import {
   Easing,
   SafeAreaViewBase,
   SafeAreaView,
+  Button,
+  TextInput,
 } from 'react-native';
 import {layoutUtil} from '../../common/helpers/layoutUtil';
+import {Rating, AirbnbRating} from 'react-native-ratings';
+
+import Modal from 'react-native-modal';
+import Space from '../../common/components/abstract/Space';
+
 const {width, height} = layoutUtil;
 
 const API_KEY = apis.pexelApiKey;
@@ -36,6 +43,8 @@ const GalleryView = () => {
   // SetStates
   const [images, setImages] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [feedback, setFeedBack] = useState('');
   const topRef = useRef();
   const thumbRef = useRef();
 
@@ -56,6 +65,10 @@ const GalleryView = () => {
     fetchImages();
     return () => {};
   }, [topRef, thumbRef]);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   const scrollToActiveIndex = (index: any) => {
     // setIndex(index)
@@ -113,9 +126,79 @@ const GalleryView = () => {
 
   //   const viewabilityConfigCallbackPairs = useRef([{viewItemChanged}]);
 
+  const ratingCompleted = rating => {
+    console.log('Rating is: ' + rating);
+  };
+
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <StatusBar hidden />
+
+      <Modal isVisible={isModalVisible}>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <View
+            style={{
+              borderRadius: 12,
+              backgroundColor: '#fff',
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: 400,
+              width: '90%',
+            }}>
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: '500',
+              }}>
+              How did they do..??
+            </Text>
+
+            <Rating
+              type="heart"
+              ratingCount={5}
+              imageSize={60}
+              showRating
+              onFinishRating={ratingCompleted}
+            />
+            <Space.V s={10} />
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: '500',
+              }}>
+              Care to share more about it..?
+            </Text>
+            <Space.V s={6} />
+            <TextInput
+              multiline={true}
+              numberOfLines={4}
+              value={feedback}
+              onChangeText={text => setFeedBack(text)}
+              style={{
+                borderWidth: 2,
+                borderRadius: 5,
+                width: '80%',
+                paddingHorizontal: 20
+              }}
+            />
+            <Space.V s={20} />
+            <TouchableOpacity
+              style={{
+                backgroundColor: '#24A0ED',
+                width: 200,
+                height: 40,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 10,
+              }}
+              onPress={() => {
+                toggleModal();
+              }}>
+              <Text style={{color: '#fff'}}>Publish Feedback</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
       <FlatList
         ref={topRef}
         data={images}
@@ -133,12 +216,14 @@ const GalleryView = () => {
         // viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
         renderItem={({item}) => {
           return (
-            <View style={{width, height}}>
-              <Image
-                style={StyleSheet.absoluteFillObject}
-                source={{uri: item?.src?.portrait}}
-              />
-            </View>
+            <TouchableOpacity onPress={() => toggleModal()}>
+              <View style={{width, height}}>
+                <Image
+                  style={StyleSheet.absoluteFillObject}
+                  source={{uri: item?.src?.portrait}}
+                />
+              </View>
+            </TouchableOpacity>
           );
         }}
       />
