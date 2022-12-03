@@ -42,7 +42,7 @@ function Navigator() {
   }, []);
   return (
     <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator initialRouteName="GalleryView">
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           options={{headerShown: false}}
           name="Landing"
