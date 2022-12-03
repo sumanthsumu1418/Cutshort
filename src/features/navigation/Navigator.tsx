@@ -12,6 +12,8 @@ import SendMoney from '../sendMoney/SendMoney';
 import RequestMoney from '../requestMoney/RequestMoney';
 import ProductView from '../productView/ProductView';
 import Remixer from '../remixer/Remixer';
+import GalleryView from '../Flatlist/galleryView';
+
 // import {Colors} from '../../Theme/Variables';
 
 export type RootStackParamsList = {
@@ -21,6 +23,7 @@ export type RootStackParamsList = {
   RequestMoney: undefined;
   ProductView: undefined;
   Remixer: undefined;
+  GalleryView: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamsList>();
@@ -39,7 +42,7 @@ function Navigator() {
   }, []);
   return (
     <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator initialRouteName="Remixer">
+      <Stack.Navigator initialRouteName="GalleryView">
         <Stack.Screen
           options={{headerShown: false}}
           name="Landing"
@@ -69,6 +72,11 @@ function Navigator() {
           options={{headerShown: false}}
           name="Remixer"
           component={Remixer}
+        />
+         <Stack.Screen
+          options={{headerShown: false}}
+          name="GalleryView"
+          component={GalleryView}
         />
       </Stack.Navigator>
     </NavigationContainer>
