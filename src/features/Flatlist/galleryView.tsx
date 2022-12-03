@@ -6,10 +6,8 @@ import {
   StatusBar,
   FlatList,
   Image,
-  Animated,
   Text,
   View,
-  Dimensions,
   StyleSheet,
   TouchableOpacity,
   Easing,
@@ -21,7 +19,8 @@ const {width, height} = layoutUtil;
 
 const API_KEY = apis.pexelApiKey;
 const API_URL = apis.pexelBaseUrl + apis.pexelEndPount;
-const ImageSize = 80;
+const ImageSize = 150;
+const SPACING = 15;
 
 const callApi = async () => {
   const response = await fetch(API_URL, {
@@ -36,6 +35,9 @@ const callApi = async () => {
 const GalleryView = () => {
   // SetStates
   const [images, setImages] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const topRef = useRef();
+  const thumbRef = useRef();
 
   useEffect(() => {
     console.log(width, height);
@@ -53,10 +55,31 @@ const GalleryView = () => {
 
     fetchImages();
     return () => {};
-  }, []);
+  }, [topRef, thumbRef]);
+
+  const scrollToActiveIndex = (index: any) => {
+    // setIndex(index)
+    // scroll flatlist
+    setActiveIndex(index);
+    topRef?.current?.scrollToOffset({
+      offset: index * width,
+      animated: true,
+    });
+    if (index * (ImageSize + SPACING) - ImageSize / 2 > width / 2) {
+      thumbRef?.current?.scrollToOffset({
+        offset: index * (ImageSize + SPACING * 2.1) - width / 2 + ImageSize / 2,
+        animated: true,
+      });
+    } else {
+      thumbRef?.current?.scrollToOffset({
+        offset: 0,
+        animated: true,
+      });
+    }
+  };
 
   if (!images) {
-    console.warn('Images are null ====>');
+    // console.warn('Images are null ====>');
     return (
       <View
         style={{
@@ -71,8 +94,6 @@ const GalleryView = () => {
     );
   }
 
-  console.log(images);
-
   //   const viewItemChanged = useCallback((info: {changed: ViewToken[]}): void => {
   //     const visibleItems = info.changed.filter(entry => entry.isViewable);
   //     // perform side effect
@@ -83,12 +104,12 @@ const GalleryView = () => {
   //     });
   //   }, []);
 
-  const viewItemChanged = useCallback(({viewableItems}) => {
-    // if (viewableItems.length === 1) {
-    //   setCurrentSectionIndex(viewableItems[0].index);
-    // }
-    console.log('Viewable Items====>', viewableItems);
-  }, []);
+  // const viewItemChanged = useCallback(({viewableItems}) => {
+  //   // if (viewableItems.length === 1) {
+  //   //   setCurrentSectionIndex(viewableItems[0].index);
+  //   // }
+  //   console.log('Viewable Items====>', viewableItems);
+  // }, []);
 
   //   const viewabilityConfigCallbackPairs = useRef([{viewItemChanged}]);
 
@@ -96,10 +117,19 @@ const GalleryView = () => {
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <StatusBar hidden />
       <FlatList
+        ref={topRef}
         data={images}
         keyExtractor={item => item.id.toString()}
-        onViewableItemsChanged={viewItemChanged}
-        viewabilityConfig={{itemVisiblePercentThreshold: 90}}
+        horizontal={true}
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        onMomentumScrollEnd={ev => {
+          scrollToActiveIndex(
+            Math.floor(ev.nativeEvent.contentOffset.x / width),
+          );
+        }}
+        // onViewableItemsChanged={viewItemChanged}
+        // viewabilityConfig={{itemVisiblePercentThreshold: 90}}
         // viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
         renderItem={({item}) => {
           return (
@@ -111,30 +141,32 @@ const GalleryView = () => {
             </View>
           );
         }}
-        horizontal={true}
-        pagingEnabled
       />
       <FlatList
+        ref={thumbRef}
         data={images}
+        horizontal={true}
         keyExtractor={item => item.id.toString()}
         style={{position: 'absolute', bottom: ImageSize / 2}}
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{paddingHorizontal: 12}}
+        contentContainerStyle={{paddingHorizontal: SPACING}}
         renderItem={({item, index}) => {
           return (
-            <Image
-              style={{
-                width: ImageSize,
-                height: ImageSize,
-                marginHorizontal: ImageSize / 10,
-                borderRadius: 14,
-                borderWidth: 2,
-              }}
-              source={{uri: item?.src?.portrait}}
-            />
+            <TouchableOpacity onPress={() => scrollToActiveIndex(index)}>
+              <Image
+                style={{
+                  width: ImageSize,
+                  height: ImageSize,
+                  marginHorizontal: SPACING,
+                  borderRadius: 14,
+                  borderWidth: 2,
+                  borderColor: activeIndex == index ? '#fff' : 'transparent',
+                }}
+                source={{uri: item?.src?.portrait}}
+              />
+            </TouchableOpacity>
           );
         }}
-        horizontal={true}
       />
     </View>
   );
